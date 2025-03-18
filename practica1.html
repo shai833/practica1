@@ -1,0 +1,214 @@
+
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Matemática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .calculator h2 {
+            margin-bottom: 20px;
+        }
+        input[type="number"], select {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Calculadora Matemática</h2>
+    <input type="number" id="num1" placeholder="Número 1">
+    <input type="number" id="num2" placeholder="Número 2">
+    <select id="operation">
+        <option value="sum">Suma</option>
+        <option value="subtract">Resta</option>
+        <option value="multiply">Multiplicación</option>
+        <option value="divide">División</option>
+    </select>
+    <br>
+    <button onclick="calculate()">Calcular</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculate() {
+        // Obtener los valores de los campos
+        let num1 = parseFloat(document.getElementById("num1").value);
+        let num2 = parseFloat(document.getElementById("num2").value);
+        let operation = document.getElementById("operation").value;
+        let result = document.getElementById("result");
+
+        // Verificar si los números son válidos
+        if (isNaN(num1) || isNaN(num2)) {
+            result.innerHTML = "Por favor ingresa dos números válidos.";
+            result.style.color = "red";
+            return;
+        }
+
+        // Realizar la operación seleccionada
+        let output;
+        switch (operation) {
+            case "sum":
+                output = num1 + num2;
+                result.style.color = "black";
+                break;
+            case "subtract":
+                output = num1 - num2;
+                result.style.color = "black";
+                break;
+            case "multiply":
+                output = num1 * num2;
+                result.style.color = "black";
+                break;
+            case "divide":
+                if (num2 === 0) {
+                    output = "No se puede dividir entre 0.";
+                    result.style.color = "red";
+                } else {
+                    output = num1 / num2;
+                    result.style.color = "black";
+                }
+                break;
+            default:
+                output = "Operación no válida.";
+                result.style.color = "red";
+        }
+
+        // Mostrar el resultado
+        result.innerHTML = "Resultado: " + output;
+    }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Matemática Avanzada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .calculator h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Calculadora Matemática</h2>
+    <input type="text" id="expression" placeholder="Ingresa una expresión matemática">
+    <br>
+    <button onclick="calculate()">Calcular</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculate() {
+        // Obtener la expresión ingresada por el usuario
+        let expression = document.getElementById("expression").value;
+
+        // Verificar si la expresión está vacía
+        if (expression.trim() === "") {
+            document.getElementById("result").innerHTML = "Por favor ingresa una expresión.";
+            document.getElementById("result").style.color = "red";
+            return;
+        }
+
+        // Intentar evaluar la expresión usando la función eval() de JavaScript
+        try {
+            // Evalúa la expresión matemática respetando la jerarquía de operaciones
+            let result = eval(expression);
+            document.getElementById("result").innerHTML = "Resultado: " + result;
+            document.getElementById("result").style.color = "black";
+        } catch (error) {
+            // Si ocurre un error (como una expresión no válida), muestra un mensaje de error
+            document.getElementById("result").innerHTML = "Expresión inválida. Verifica la sintaxis.";
+            document.getElementById("result").style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
